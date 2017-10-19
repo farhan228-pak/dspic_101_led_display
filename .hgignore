@@ -8,3 +8,4 @@ syntax: glob
 *.mk
 *.properties
 *.bash
+led display1.X\Makefile

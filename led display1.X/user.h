@@ -25,9 +25,9 @@ extern volatile int frequency;
 
 
 #define LEDb5 LATBbits.LATB1
-//define LEDb6 LATBbits.LATB5
-//#define LEDb7 LATBbits.LATB6
-//#define LEDb8 LATBbits.LATB7
+#define LEDb6 LATBbits.LATB5
+#define LEDb7 LATBbits.LATB6
+#define LEDb8 LATBbits.LATB7
 
 //#//define Gate_EN1_ON (LATBbits.LATB14=1)
 //#define Gate_EN1_OFF (LATBbits.LATB14=0)
