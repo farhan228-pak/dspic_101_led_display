@@ -1,0 +1,10 @@
+syntax: glob
+*.o
+*.d
+*.map
+*.elf
+*.hex
+*.xml
+*.mk
+*.properties
+*.bash
