@@ -24,10 +24,15 @@ extern volatile int frequency;
 
 
 
-#define LEDb5 LATBbits.LATB1
-#define LEDb6 LATBbits.LATB5
-#define LEDb7 LATBbits.LATB6
-#define LEDb8 LATBbits.LATB7
+#define DB4 LATBbits.LATB0
+#define DB5 LATBbits.LATB1
+#define DB6 LATBbits.LATB2
+#define DB7 LATBbits.LATB3
+
+#define EN  LATAbits.LATA0
+#define RW  LATAbits.LATA1
+#define RS  LATAbits.LATA2 //resgister select 0=instruction 1= data_write
+#define IO2 LATAbits.LATA3
 
 //#//define Gate_EN1_ON (LATBbits.LATB14=1)
 //#define Gate_EN1_OFF (LATBbits.LATB14=0)

@@ -49,10 +49,10 @@
 //    FNOSC_FRCPLL &       // Oscillator Source Selection (Internal Fast RC (FRC) with PLL)
 //    IESO_ON              // Internal External Switch Over Mode (Start up device with FRC, then automatically switch to user-selected oscillator source)
 //);
- int FOSC __attribute__((space(prog), address(0xF80008))) = 0xE7 ;
+ int FOSC __attribute__((space(prog), address(0xF80008))) = 0xE3 ;
 //_FOSC(
 //    POSCMD_NONE &        // Primary Oscillator Source (Primary oscillator disabled)
-//    OSCIOFNC_OFF &       // OSC2 Pin Function (OSC2 is clock output)
+//    OSCIOFNC_ON &        // OSC2 Pin Function (OSC2 is general purpose digital I/O pin)
 //    IOL1WAY_ON &         // Peripheral Pin Select Configuration (Allow only one reconfiguration)
 //    FCKSM_CSDCMD         // Clock Switching and Monitor (Clock switching and Fail-Safe Clock Monitor are disabled, Mon Disabled)
 //);
@@ -72,6 +72,7 @@
 //    ICS_PGD1 &           // Comm Channel Select (Communicate on PGC1/EMUC1 and PGD1/EMUD1)
 //    JTAGEN_OFF           // JTAG Port Enable (JTAG is disabled)
 //);
+
 
 
     

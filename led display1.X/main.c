@@ -11,28 +11,77 @@
 #include "stdio.h"
 #include "user.h"
 #include <libpic30.h>
+#include <delay.h>
 //#define FYC 40000000
-
-
-
+void delay1(void);
+void init_4bit(void);
+void line_sel(void);
+void dis_cour(void);
 int main(void) {
     //initClock();
-    InitPins();
+   InitPins();
   while(1)
   {
-   //int x;
-   //float f;
-   //f=x;
-   LEDb5=1;
+ EN=0;
+ delay1();
+ 
+ init_4bit();
+ delay1();
+line_sel();
+delay1();
+dis_cour();
+delay1();
+/**********************************************/
+   /***********************/
+  /*  LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+    delay1();
    LATB=0x00;
- //__delay_ms(10);
-   LEDb5=0;
-  // __delay_ms(10);
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+   delay1(); 
+    
+   LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+   delay1(); 
+   
+   LATB=0x0E;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+   delay1();*/
+/**********************************************/  
+  while(1)
+  {
+     // init_4bit();
+  }
+   
+   
   }
     return 0;
 }
 
-
+void delay1(void)
+{
+      int i=0;
+   for(i=0;i<=1200;i++)
+   {
+       Nop();
+   }
+}
 void initClock(void)
 {
 	/* Configure Oscillator to operate the device at 40Mhz
@@ -64,4 +113,57 @@ void initClock(void)
 	while(ACLKCONbits.APLLCK != 1);			/* Wait for Auxiliary PLL to Lock */
 
     
+}
+void init_4bit(void)
+{
+ /*   LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;*/
+   
+   LATB=0x02;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+     delay1();
+}
+
+void line_sel(void)
+{
+     LATB=0x01;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+    delay1();
+      LATB=0x08;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+    delay1();
+}
+
+void dis_cour(void)
+{
+    LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+    delay1();
+   LATB=0x0F;
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+   delay1(); 
 }

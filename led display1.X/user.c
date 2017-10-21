@@ -20,6 +20,7 @@
 
 /******************************************************************************/
 /* User Functions                                                             */
+void InitPins(void);
 /******************************************************************************/
 volatile unsigned int pulse_count = 0;
 volatile int frequency = 2;
@@ -31,12 +32,14 @@ bool PowerOn=false;
 void InitPins() {
     /* Initialize peripherals */
     //Frequency Select LEDs
-    _TRISB3 = 0;
-
-    _TRISB4 = 0;
+    _TRISB0 = 0;
     _TRISB1 = 0;
-    _TRISB6 = 0;
-    _TRISB7 = 0;
+    _TRISB2 = 0;
+    _TRISB3 = 0;
+    _TRISA0 = 0;
+    _TRISA1 = 0;
+    _TRISA2 = 0;
+    _TRISA3 = 0;
 }
 
 void InitTimers() {
