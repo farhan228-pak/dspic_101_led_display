@@ -36,6 +36,12 @@ void InitPins() {
     _TRISB1 = 0;
     _TRISB2 = 0;
     _TRISB3 = 0;
+     _TRISB4 = 0;
+      _TRISB5 = 0;
+       _TRISB6 = 0;
+        _TRISB7 = 0;
+    
+    
     _TRISA0 = 0;
     _TRISA1 = 0;
     _TRISA2 = 0;

@@ -24,15 +24,34 @@ extern volatile int frequency;
 
 
 
-#define DB4 LATBbits.LATB0
-#define DB5 LATBbits.LATB1
-#define DB6 LATBbits.LATB2
+#define DB0 LATBbits.LATB0
+#define DB1 LATBbits.LATB1
+#define DB2 LATBbits.LATB2
+#define DB3 LATBbits.LATB3
+#define DB4 LATBbits.LATB3
+#define DB5 LATBbits.LATB3
+#define DB6 LATBbits.LATB3
 #define DB7 LATBbits.LATB3
+
+#define DB8 LATBbits.LATB3
 
 #define EN  LATAbits.LATA0
 #define RW  LATAbits.LATA1
 #define RS  LATAbits.LATA2 //resgister select 0=instruction 1= data_write
 #define IO2 LATAbits.LATA3
+
+#define CLR 0x01
+#define Return_cursor 0x02
+#define line_4  0x09
+#define inter_8bit 0b00111000
+#define D_C_ON 0x0F// cursore blink display on
+
+#define line1 0x00 //start addres of 1st line DD RAM
+#define line2 0x20 //start addres of 2nd line DD RAM
+#define line3 0x40 //start addres of 3rd line DD RAM
+#define line4 0x60 //start addres of 4th line DD RAM
+
+
 
 //#//define Gate_EN1_ON (LATBbits.LATB14=1)
 //#define Gate_EN1_OFF (LATBbits.LATB14=0)

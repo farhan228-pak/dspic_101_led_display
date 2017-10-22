@@ -9,6 +9,7 @@
 //#include "xc.h"
 #include "config_bits.h"
 #include "stdio.h"
+#include <stdint.h>
 #include "user.h"
 #include <libpic30.h>
 #include <delay.h>
@@ -17,6 +18,9 @@ void delay1(void);
 void init_4bit(void);
 void line_sel(void);
 void dis_cour(void);
+void data_wr(uint8_t data);
+void DD_RAM_Address(uint8_t addr);
+
 int main(void) {
     //initClock();
    InitPins();
@@ -29,41 +33,104 @@ int main(void) {
  delay1();
 line_sel();
 delay1();
-dis_cour();
+uint8_t count= line1;
+uint8_t j=0;
+for (j=0;j<=80;j++)
+{
+//DD_RAM_Address(count+j);
+data_wr((count+j)+0x21);
+int k=0;
+for(k=0;k<=30000;k++)
+{
+    delay1();
+}
+
 delay1();
+}
+while(1);
+DD_RAM_Address(line2);
+delay1();
+data_wr('2');
+delay1();
+DD_RAM_Address(line3);
+delay1();
+data_wr('3');
+delay1();
+DD_RAM_Address(line4);
+delay1();
+data_wr('4');
+/*
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+data_wr('0');
+data_wr('1');
+data_wr('2');
+data_wr('3');
+data_wr('4');
+data_wr('5');
+data_wr('6');
+data_wr('7');
+data_wr('8');
+data_wr('9');
+*/
+//dis_cour();
+delay1();
+
 /**********************************************/
-   /***********************/
-  /*  LATB=0x00;
-   RW =0;
-   RS=0;
-   EN=1;
-    delay1();
-   EN=0;
-    delay1();
-   LATB=0x00;
-   RW =0;
-   RS=0;
-   EN=1;
-    delay1();
-   EN=0;
-   delay1(); 
-    
-   LATB=0x00;
-   RW =0;
-   RS=0;
-   EN=1;
-    delay1();
-   EN=0;
-   delay1(); 
-   
-   LATB=0x0E;
-   RW =0;
-   RS=0;
-   EN=1;
-    delay1();
-   EN=0;
-   delay1();*/
-/**********************************************/  
+ 
   while(1)
   {
      // init_4bit();
@@ -77,7 +144,7 @@ delay1();
 void delay1(void)
 {
       int i=0;
-   for(i=0;i<=1200;i++)
+   for(i=0;i<=120;i++)
    {
        Nop();
    }
@@ -114,44 +181,88 @@ void initClock(void)
 
     
 }
+void DD_RAM_Address(uint8_t addr)
+{
+    LATB=(addr | 0b10000000);
+   //LATB=(addr);// | 0b10000000);
+    // DB7=1;
+   RW =0;
+   RS=0;
+   EN=1;
+   delay1();
+   EN=0;
+   delay1();
+}
+
 void init_4bit(void)
 {
- /*   LATB=0x00;
+   //LATB=0b00111100;
+    LATB=CLR;
    RW =0;
    RS=0;
    EN=1;
     delay1();
-   EN=0;*/
-   
-   LATB=0x02;
+   EN=0;
+   delay1();
+   LATB=Return_cursor;
+   RW =0;
+   RS=0;
+   EN=1;
+   delay1();
+   EN=0;
+   delay1();
+   LATB=line_4;//4 line mode
+   RW =0;
+   RS=0;
+   EN=1;
+    delay1();
+   EN=0;
+     delay1();   
+     
+}
+
+void line_sel(void)
+{
+   LATB=inter_8bit;
+   RW =0;
+   RS=0;
+   EN=1;
+   delay1();
+   EN=0;
+   delay1(); 
+    
+     LATB=D_C_ON;
    RW =0;
    RS=0;
    EN=1;
     delay1();
    EN=0;
      delay1();
+     
+  
 }
-
-void line_sel(void)
+void data_wr(uint8_t data)
 {
-     LATB=0x01;
+   LATB=data;
    RW =0;
-   RS=0;
+   RS=1;
    EN=1;
-    delay1();
+   delay1();
    EN=0;
-    delay1();
-      LATB=0x08;
-   RW =0;
-   RS=0;
-   EN=1;
-    delay1();
-   EN=0;
-    delay1();
+   delay1(); 
 }
 
 void dis_cour(void)
 {
+   LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+   delay1();
+   EN=0;
+   delay1(); 
+    
+    
     LATB=0x00;
    RW =0;
    RS=0;
@@ -159,6 +270,15 @@ void dis_cour(void)
     delay1();
    EN=0;
     delay1();
+    
+       LATB=0x00;
+   RW =0;
+   RS=0;
+   EN=1;
+   delay1();
+   EN=0;
+   delay1(); 
+   
    LATB=0x0F;
    RW =0;
    RS=0;
