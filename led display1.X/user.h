@@ -16,7 +16,7 @@ void InitApp(void); /* I/O and Peripheral Initialization */
 void Burst(void);
 void init_ADC(void);
 void TogglePower(void);
-
+void InitPins(void);
 extern volatile unsigned int pulse_count;
 extern volatile int frequency;
 
@@ -43,8 +43,10 @@ extern volatile int frequency;
 #define CLR 0x01
 #define Return_cursor 0x02
 #define line_4  0x09
-#define inter_8bit 0b00111000
+#define inter_8bit 0x34//8 bit with RE=1 by this code 
+#define RE_0_8bit 0x30
 #define D_C_ON 0x0F// cursore blink display on
+#define inc_courser 0x06
 
 #define line1 0x00 //start addres of 1st line DD RAM
 #define line2 0x20 //start addres of 2nd line DD RAM
