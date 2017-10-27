@@ -15,17 +15,33 @@
 #include <delay.h>
 #define FYC 40000000
 void delay1(void);
+
+void delay_xm(int m);
 void init_LCD(void);
 void initClock(void);
-
+void WriteLetter2Width(uint8_t letter[]);
+void WriteLetter6Width(uint8_t letter[]);
 void data_wr(uint8_t data);
 void DD_RAM_Address(uint8_t addr);
-
+ int m; 
+ uint8_t F[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
+ uint8_t A[]={0x7F,0x88,0x88,0x88,0x7F,0x00};
+ uint8_t R[]={0xFF,0x98,0x9c,0x9A,0xF9,0x00,0x00};
+ uint8_t H[]={0xFF,0x08,0x08,0x08,0xFF,0x00,0x00};
+ //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
+ uint8_t N[]={0xFF,0xc0,0x10,0x04,0xFF,0x00,0x00};
+ uint8_t space[]={0x00,0x00};
 int main(void) {
     //initClock();
     __delay32(10000);
     //Delay_5mS_Cnt();
    InitPins();
+//int timer =1100;    
+//int U18 = 3;
+int State = 0;         
+int lastState = 0; 
+ 
+   
   while(1)
   {
  EN=0;
@@ -33,44 +49,66 @@ int main(void) {
  
  init_LCD();
  delay1();
-//line_sel();
-//delay1();
-uint8_t count= 0x00;
-//DD_RAM_Address(0xA0);
-uint8_t j=0;
-for (j=0;j<=80;j++)
-{
-//DD_RAM_Address(count+j);
-data_wr((count+j)+0x21);
+
+ while(1)
+ {
+     State= hall;
+if (State != lastState){
+  if (State == 1){
+//delayMicroseconds(5000);
+//delayMicroseconds(10000);
+
+//delay(500);
+
+//WriteLetter3Width(A);
+ /*int n;
+     m=0;
+  for ( n=0; n<=5; n++){
+  
+   LATB=F[n];
+    
+    m=m+1;
+delay_xm(20);
+//LATB=0x00;
+
+    
+  }     */
+      WriteLetter6Width(F);
+      WriteLetter2Width(space);
+      WriteLetter6Width(A);
+      WriteLetter2Width(space);
+      WriteLetter6Width(R);
+       WriteLetter2Width(space);
+       WriteLetter6Width(H);
+       WriteLetter2Width(space);
+       WriteLetter6Width(A);
+       WriteLetter2Width(space);
+       WriteLetter6Width(N);
+       WriteLetter2Width(space);
+delay1();
+delay1();
+delay1();
+  }
+}
+lastState = State;
+ 
+/*
 int k=0;
-for(k=0;k<=30000;k++)
+for(k=0;k<=3000;k++)
 {
     delay1();
-}
+}*/
+//LATB=0x00;
+//k=0;
+ }
 
-delay1();
-}
-while(1);
-DD_RAM_Address(line2);
-delay1();
-data_wr('2');
-delay1();
-DD_RAM_Address(line3);
-delay1();
-data_wr('3');
-delay1();
-DD_RAM_Address(line4);
-delay1();
-data_wr('4');
+
+ 
 delay1();
 
 /**********************************************/
  
-  while(1)
-  {
-     // init_4bit();
-  }
-   
+
    
   }
     return 0;
@@ -84,6 +122,17 @@ void delay1(void)
        Nop();
    }
 }
+
+void delay_xm(int m)
+{
+      int k=0;
+for(k=0;k<=m;k++)
+{
+    //delay1();
+    delay1();
+}
+}
+
 void initClock(void)
 {
 	/* Configure Oscillator to operate the device at 40Mhz
@@ -194,3 +243,25 @@ void data_wr(uint8_t data)
    delay1(); 
 }
 
+void WriteLetter6Width(uint8_t letter[]){
+    int n;
+     m=0;
+  for ( n=0; n<=4; n++){
+  
+   LATB= letter[m];
+    
+    m=m+1;
+  delay_xm(15);
+}
+}
+void WriteLetter2Width(uint8_t letter[]){
+    int n;
+     m=0;
+  for ( n=0; n<=2; n++){
+  
+   LATB= letter[m];
+    
+    m=m+1;
+  delay_xm(15);
+}
+}

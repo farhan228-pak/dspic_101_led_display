@@ -28,10 +28,13 @@ extern volatile int frequency;
 #define DB1 LATBbits.LATB1
 #define DB2 LATBbits.LATB2
 #define DB3 LATBbits.LATB3
-#define DB4 LATBbits.LATB3
-#define DB5 LATBbits.LATB3
-#define DB6 LATBbits.LATB3
-#define DB7 LATBbits.LATB3
+#define DB4 LATBbits.LATB4
+#define DB5 LATBbits.LATB5
+#define DB6 LATBbits.LATB6
+#define DB7 LATBbits.LATB7
+
+#define hall PORTAbits.RA3
+
 
 #define DB8 LATBbits.LATB3
 
