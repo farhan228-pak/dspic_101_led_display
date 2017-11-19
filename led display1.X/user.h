@@ -33,8 +33,8 @@ extern volatile int frequency;
 #define DB6 LATBbits.LATB6
 #define DB7 LATBbits.LATB7
 
-#define hall PORTAbits.RA3
-
+//#define hall PORTAbits.RA3
+#define hall PORTBbits.RB15
 
 #define DB8 LATBbits.LATB3
 

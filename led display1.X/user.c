@@ -46,6 +46,7 @@ void InitPins() {
     _TRISA1 = 0;
     _TRISA2 = 0;
     _TRISA3 = 1;
+    _TRISB15 = 1;
 }
 
 void InitTimers() {

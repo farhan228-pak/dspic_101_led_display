@@ -22,6 +22,7 @@ void initClock(void);
 void WriteLetter2Width(uint8_t letter[]);
 void WriteLetter6Width(uint8_t letter[]);
 void WriteLetter5Width(uint8_t letter[]);
+void WriteLetter9Width(uint8_t letter[]);
 void data_wr(uint8_t data);
 void DD_RAM_Address(uint8_t addr);
  int m; 
@@ -32,6 +33,9 @@ void DD_RAM_Address(uint8_t addr);
  //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
  uint8_t N[]={0xFF,0x60,0x18,0x04,0x02,0xFF,0x00};
  uint8_t space[]={0x00,0x00};
+ 
+ uint8_t custom[]={0b00000001,0b00000011,0b00000110,0b00001100,0b00000101,0b01111100,0b11000000,0b11000000,0b10111111,0b00000000,0b00110000,0b01001000,0b01111111,0b00000001,0b00011111,0b00000001,0b01111111,0b00000000,0b01111111}; // 8x9
+ 
 int main(void) {
     //initClock();
     __delay32(10000);
@@ -42,14 +46,13 @@ int main(void) {
 int State = 0;         
 int lastState = 0; 
  
-   
   while(1)
   {
- EN=0;
- delay1();
+ //EN=0;
+ //delay1();
  
- init_LCD();
- delay1();
+ //init_LCD();
+ //delay1();
 
  while(1)
  {
@@ -70,7 +73,7 @@ if (State != lastState){
     
     m=m+1;
 delay_xm(20);
-//LATB=0x00;
+LATB=0x00;
 
     
   }     */
@@ -79,44 +82,45 @@ delay_xm(20);
       WriteLetter6Width(A);
       WriteLetter2Width(space);
       WriteLetter6Width(R);
-       WriteLetter2Width(space);
-       WriteLetter6Width(H);
-       WriteLetter2Width(space);
-       WriteLetter6Width(A);
-       WriteLetter2Width(space);
-       WriteLetter6Width(N);
-       WriteLetter2Width(space);
-       WriteLetter2Width(space);
-       WriteLetter2Width(space);
-         WriteLetter6Width(F);
+      WriteLetter2Width(space);
+      WriteLetter6Width(H);
+      WriteLetter2Width(space);
+      WriteLetter6Width(A);
+      WriteLetter2Width(space);
+      WriteLetter6Width(N);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      WriteLetter6Width(F);
       WriteLetter2Width(space);
       WriteLetter6Width(A);
       WriteLetter2Width(space);
       WriteLetter6Width(R);
-       WriteLetter2Width(space);
-       WriteLetter6Width(H);
-       WriteLetter2Width(space);
-       WriteLetter6Width(A);
-       WriteLetter2Width(space);
-       WriteLetter6Width(N);
-       WriteLetter2Width(space);
-          WriteLetter2Width(space);
-       WriteLetter2Width(space);
-         WriteLetter6Width(F);
+      WriteLetter2Width(space);
+      WriteLetter6Width(H);
+      WriteLetter2Width(space);
+      WriteLetter6Width(A);
+      WriteLetter2Width(space);
+      WriteLetter6Width(N);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      WriteLetter6Width(F);
       WriteLetter2Width(space);
       WriteLetter6Width(A);
       WriteLetter2Width(space);
       WriteLetter6Width(R);
-       WriteLetter2Width(space);
-       WriteLetter6Width(H);
-       WriteLetter2Width(space);
-       WriteLetter6Width(A);
-       WriteLetter2Width(space);
-       WriteLetter6Width(N);
-       WriteLetter2Width(space);
-          WriteLetter2Width(space);
-       WriteLetter2Width(space);
-      
+      WriteLetter2Width(space);
+      WriteLetter6Width(H);
+      WriteLetter2Width(space);
+      WriteLetter6Width(A);
+      WriteLetter2Width(space);
+      WriteLetter6Width(N);
+     // WriteLetter9Width(custom);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+     
 delay1();
 delay1();
 delay1();
@@ -294,21 +298,31 @@ void WriteLetter5Width(uint8_t letter[]){
    LATB= letter[m];
     
     m=m+1;
-    if(n==0 || n==1 || n==2)
-    {
-  delay_xm(3);
-    }
-    else
-    {
-      delay_xm(n);  
-    }
+   
+      delay_xm(5);  
+    
 }    
  }   
 
+ 
+ void WriteLetter9Width(uint8_t letter[]){
+    int n;
+     m=0;
+  for ( n=0; n<=18; n++){
+  
+   LATB= letter[m];
+    
+    m=m+1;
+  delay_xm(2);
+}
+}
+ 
+ 
+ 
 void WriteLetter2Width(uint8_t letter[]){
     int n;
      m=0;
-  for ( n=0; n<=2; n++){
+  for ( n=0; n<=1; n++){
   
    LATB= letter[m];
     
