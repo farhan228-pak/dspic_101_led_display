@@ -291,7 +291,7 @@ void WriteLetter5Width(uint8_t letter[]){
 }
 }    
  void WriteLetter6Width(uint8_t letter[]){
-    int n;
+    int n;//=54/60;
      m=0;
   for ( n=0; n<=5; n++){
   
