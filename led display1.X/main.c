@@ -26,12 +26,13 @@ void WriteLetter9Width(uint8_t letter[]);
 void data_wr(uint8_t data);
 void DD_RAM_Address(uint8_t addr);
  int m; 
- uint8_t F[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
- uint8_t A[]={0x7F,0x88,0x88,0x88,0x7F,0x00};
- uint8_t R[]={0xFF,0x98,0x9c,0x9A,0xF9,0x00,0x00};
- uint8_t H[]={0xFF,0x08,0x08,0x08,0xFF,0x00,0x00};
+ //uint8_t F[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
+ uint8_t F[]={0xFF,0x09,0x09,0x09,0x01,0x00,0x00};// for reverse on padister fan clock wise print
+ uint8_t A[]={0xFE,11,0x11,0x11,0xFE,0x00};// for reverse on padister fan clock wise print
+ uint8_t R[]={0xFF,0x19,0x39,0x59,0x9F,0x00};// for reverse on padister fan clock wise print
+ uint8_t H[]={0xFF,0x10,0x10,0x10,0xFF,0x00};// for reverse on padister fan clock wise print
  //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
- uint8_t N[]={0xFF,0x60,0x18,0x04,0x02,0xFF,0x00};
+ uint8_t N[]={0xFF,0x03,0x08,0x20,0xFF,0x00};// for reverse on padister fan clock wise print
  uint8_t space[]={0x00,0x00};
  
  uint8_t custom[]={0b00000001,0b00000011,0b00000110,0b00001100,0b00000101,0b01111100,0b11000000,0b11000000,0b10111111,0b00000000,0b00110000,0b01001000,0b01111111,0b00000001,0b00011111,0b00000001,0b01111111,0b00000000,0b01111111}; // 8x9
@@ -77,18 +78,25 @@ LATB=0x00;
 
     
   }     */
-      WriteLetter6Width(F);
-      WriteLetter2Width(space);
-      WriteLetter6Width(A);
-      WriteLetter2Width(space);
-      WriteLetter6Width(R);
-      WriteLetter2Width(space);
-      WriteLetter6Width(H);
-      WriteLetter2Width(space);
-      WriteLetter6Width(A);
-      WriteLetter2Width(space);
-      WriteLetter6Width(N);
-      WriteLetter2Width(space);
+
+
+  
+ 
+////     
+////      WriteLetter6Width(N);
+////      WriteLetter2Width(space);
+////       WriteLetter6Width(A);
+////      WriteLetter2Width(space);
+////           WriteLetter6Width(H);
+////      WriteLetter2Width(space);
+////      
+////          WriteLetter6Width(R);
+////      WriteLetter2Width(space);
+////           WriteLetter6Width(A);
+//      WriteLetter2Width(space); 
+//            WriteLetter6Width(F);
+//      WriteLetter2Width(space);
+      
       WriteLetter2Width(space);
       WriteLetter2Width(space);
       WriteLetter6Width(F);
@@ -134,7 +142,7 @@ for(k=0;k<=3000;k++)
 {
     delay1();
 }*/
-//LATB=0x00;
+//LATB=0xFF;
 //k=0;
  }
 
@@ -299,7 +307,7 @@ void WriteLetter5Width(uint8_t letter[]){
     
     m=m+1;
    
-      delay_xm(5);  
+      delay_xm(10);  
     
 }    
  }   
