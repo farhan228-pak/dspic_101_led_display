@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include "user.h"
 #include <libpic30.h>
-#include <delay.h>
+#include "delay.h"
 #define FYC 40000000
 void delay1(void);
 
@@ -174,7 +174,7 @@ int lastState = 0;
  
  //init_LCD();
  //delay1();
-      int incre=0,count=0;
+      int incre=0,count=0,position=0;
       
  while(1)
  {
@@ -234,12 +234,17 @@ count++;
 if(count==20)
 {
     incre++;
-    
+    position=+2;
     if(incre==78)
     {
         incre=0;
 
     }
+    if(position==8)
+    {
+        position=0;
+    }
+    
     count=0;
 }   
             

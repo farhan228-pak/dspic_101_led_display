@@ -19,7 +19,7 @@ void TogglePower(void);
 void InitPins(void);
 extern volatile unsigned int pulse_count;
 extern volatile int frequency;
-
+//const uint8_t fonts [77][5];
 //#define LEDf1 LATBbits.LATB3
 
 
@@ -119,3 +119,6 @@ extern volatile int frequency;
 #define Burst_Period_83k       100    //
 #define Burst_Period_77k       100    //
 #define Burst_Period_66k       100    //
+
+
+
