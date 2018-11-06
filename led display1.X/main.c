@@ -217,8 +217,43 @@ LATB=0x00;
 //      WriteLetter2Width(space); 
 //            WriteLetter6Width(F);
 //      WriteLetter2Width(space);
-      delay_xm(incre*2);
-    WriteLetter5Width_2dimensional(fonts,incre); 
+     delay_xm(position);
+      if(position>=50)
+      {
+          WriteLetter5Width_2dimensional(fonts,72);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      
+      }
+       if(position>=100)
+      {
+          WriteLetter5Width_2dimensional(fonts,72);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      
+      }
+            if(position>=200)
+      {
+          WriteLetter5Width_2dimensional(fonts,72);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      
+      }
+             if(position>=300)
+      {
+          WriteLetter5Width_2dimensional(fonts,72);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      
+      }
+                 if(position>=400)
+      {
+          WriteLetter5Width_2dimensional(fonts,72);
+      WriteLetter2Width(space);
+      WriteLetter2Width(space);
+      
+      }
+    WriteLetter5Width_2dimensional(fonts,72); 
       WriteLetter2Width(space);
       WriteLetter2Width(space);
 
@@ -231,19 +266,22 @@ LATB=0x00;
 //delay1();
 delay1();
 count++;
+ position++;
+ if(position==700)
+     position=0;
 if(count==20)
 {
     incre++;
-    position=+2;
+    //position=+2;
     if(incre==78)
     {
         incre=0;
 
     }
-    if(position==8)
-    {
-        position=0;
-    }
+//    if(position==8)
+//    {
+//        position=0;
+//    }
     
     count=0;
 }   
