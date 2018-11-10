@@ -11,8 +11,10 @@
 #include "stdio.h"
 #include <stdint.h>
 #include "user.h"
+#include "UART.h"
+#include <stdio.h>
 #include <libpic30.h>
-#include <delay.h>
+//#include <delay.h>
 #define FYC 40000000
 void delay1(void);
 
@@ -27,7 +29,24 @@ void WriteLetter5Width_2dimensional(const uint8_t letter[][5],uint8_t index);
 void data_wr(uint8_t data);
 void DD_RAM_Address(uint8_t addr);
  int m; 
+struct __FILE {
+    int dummy;
+};
 
+FILE __stdout;
+
+int fputc(int ch, FILE *f) {
+    /* Do your stuff here */
+    /* Send your custom byte */
+    /* Send byte to USART */
+    //TM_USART_Putc(USART1, ch);
+    put_string((char *) &ch);
+    // HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,0xFFFF);
+    /* If everything is OK, you have to return character written */
+    return ch;
+    /* If character is not correct, you can return EOF (-1) to stop writing */
+    //return -1;
+}
 
 
 const uint8_t fonts [][5]=
