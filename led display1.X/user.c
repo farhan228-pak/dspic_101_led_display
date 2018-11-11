@@ -71,10 +71,10 @@ void InitTimers() {
     //clock source set to the internal instruction cycle
 
     /**************************************************************/
-    
+    //timer running at clock/256 
     T2CON = 0x00; //Stops the Timer1 and reset control reg.
     TMR2 = 0x00; //Clear contents of the timer register
-    T2CONbits.TCKPS = 0b11;
+    T2CONbits.TCKPS = 0b11; //prescaler set to 256
     PR2 = 65530; //Fosc/2000UL  	//Load the Period register with 1mSec counter
     //IPC1bits.T2IP = 0x02; //Setup Timer1 interrupt for desired priority level
     // (This example assigns level 1 priority)
