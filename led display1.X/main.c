@@ -203,7 +203,8 @@ int lastState = 0;
       if(IEC0bits.T1IE == 0)
       {
          
-      printf("timer=%f\n\r",(double)(156250/timePeriod));
+      //printf("timer=%f\n\r",(double)(156250/timePeriod));
+          printf("timer=%i\n\r",(timePeriod));
       // LATAbits.LATA2=!LATAbits.LATA2;
       
         TMR1 = 0x00; // Clear timer register
