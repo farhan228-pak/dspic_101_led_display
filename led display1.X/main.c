@@ -180,7 +180,11 @@ int main(void) {
     //initClock();
     __delay32(10000);
     //Delay_5mS_Cnt();
+    initClock();
+    InitUART1();
    InitPins();
+   InitTimers();
+   init_timer();
 //int timer =1100;    
 //int U18 = 3;
 int State = 0;         
@@ -194,6 +198,20 @@ int lastState = 0;
  //init_LCD();
  //delay1();
       int incre=0,count=0;
+  while(1)
+  {
+      if(IEC0bits.T1IE == 0)
+      {
+         
+      printf("timer=%f\n\r",(double)(156250/timePeriod));
+      // LATAbits.LATA2=!LATAbits.LATA2;
+      
+        TMR1 = 0x00; // Clear timer register
+        IEC0bits.T1IE = 1;
+        T1CONbits.TON = 1; // Start Timer
+      }
+  }   
+      
       
  while(1)
  {
