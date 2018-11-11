@@ -29,24 +29,24 @@ void WriteLetter5Width_2dimensional(const uint8_t letter[][5],uint8_t index);
 void data_wr(uint8_t data);
 void DD_RAM_Address(uint8_t addr);
  int m; 
-struct __FILE {
-    int dummy;
-};
-
-FILE __stdout;
-
-int fputc(int ch, FILE *f) {
-    /* Do your stuff here */
-    /* Send your custom byte */
-    /* Send byte to USART */
-    //TM_USART_Putc(USART1, ch);
-    put_string((char *) &ch);
-    // HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,0xFFFF);
-    /* If everything is OK, you have to return character written */
-    return ch;
-    /* If character is not correct, you can return EOF (-1) to stop writing */
-    //return -1;
-}
+//struct __FILE {
+//    int dummy;
+//};
+//
+//FILE __stdout;
+//
+//int fputc(int ch, FILE *f) {
+//    /* Do your stuff here */
+//    /* Send your custom byte */
+//    /* Send byte to USART */
+//    //TM_USART_Putc(USART1, ch);
+//    put_string((char *) &ch);
+//    // HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,0xFFFF);
+//    /* If everything is OK, you have to return character written */
+//    return ch;
+//    /* If character is not correct, you can return EOF (-1) to stop writing */
+//    //return -1;
+//}
 
 
 const uint8_t fonts [][5]=
@@ -166,16 +166,16 @@ const uint8_t fonts [][5]=
 
 
  //uint8_t F[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
- uint8_t F[]={0xFF,0x09,0x09,0x09,0x01,0x00,0x00};// for reverse on padister fan clock wise print
- uint8_t A[]={0xFE,11,0x11,0x11,0xFE,0x00};// for reverse on padister fan clock wise print
- uint8_t R[]={0xFF,0x19,0x39,0x59,0x9F,0x00};// for reverse on padister fan clock wise print
- uint8_t H[]={0xFF,0x10,0x10,0x10,0xFF,0x00};// for reverse on padister fan clock wise print
- //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
- uint8_t N[]={0xFF,0x03,0x08,0x20,0xFF,0x00};// for reverse on padister fan clock wise print
- uint8_t space[]={0x00,0x00};
- 
- uint8_t custom[]={0b00000001,0b00000011,0b00000110,0b00001100,0b00000101,0b01111100,0b11000000,0b11000000,0b10111111,0b00000000,0b00110000,0b01001000,0b01111111,0b00000001,0b00011111,0b00000001,0b01111111,0b00000000,0b01111111}; // 8x9
- 
+// uint8_t F[]={0xFF,0x09,0x09,0x09,0x01,0x00,0x00};// for reverse on padister fan clock wise print
+// uint8_t A[]={0xFE,11,0x11,0x11,0xFE,0x00};// for reverse on padister fan clock wise print
+// uint8_t R[]={0xFF,0x19,0x39,0x59,0x9F,0x00};// for reverse on padister fan clock wise print
+// uint8_t H[]={0xFF,0x10,0x10,0x10,0xFF,0x00};// for reverse on padister fan clock wise print
+// //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
+// uint8_t N[]={0xFF,0x03,0x08,0x20,0xFF,0x00};// for reverse on padister fan clock wise print
+// uint8_t space[]={0x00,0x00};
+// 
+// uint8_t custom[]={0b00000001,0b00000011,0b00000110,0b00001100,0b00000101,0b01111100,0b11000000,0b11000000,0b10111111,0b00000000,0b00110000,0b01001000,0b01111111,0b00000001,0b00011111,0b00000001,0b01111111,0b00000000,0b01111111}; // 8x9
+// 
 int main(void) {
     //initClock();
     __delay32(10000);

@@ -18,7 +18,7 @@
 	#error "UART buffer length must be 32, 64 or 128 bytes!"
 #endif
 
-#define UART_BUFFER_SIZE 128
+#define UART_BUFFER_SIZE 10
 
 
 void InitUART1(void);
