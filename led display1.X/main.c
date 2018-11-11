@@ -51,8 +51,18 @@ int fputc(int ch, FILE *f) {
 
 const uint8_t fonts [][5]=
 {
- {0x7F, 0x88, 0x88, 0x88, 0x7F}, //  A
- {0xFF, 0x91, 0x91, 0x91, 0x6E}, //  B
+{0x7E, 0x89, 0x91, 0xA1, 0x7E}, //\\  0
+{0x00, 0x41, 0xFF, 0x01, 0x00}, //\\  1
+{0x43, 0x85, 0x89, 0x91, 0x61}, //\\  2
+{0x42, 0x81, 0x91, 0x91, 0x6E}, //\\  3
+{0x18, 0x28, 0x48, 0xFF, 0x08}, //\\  4
+{0xF2, 0x91, 0x91, 0x91, 0x8E}, //\\  5
+{0x1E, 0x29, 0x49, 0x89, 0x86}, //\\  6
+{0x80, 0x8F, 0x90, 0xA0, 0xC0}, //\\  7
+{0x6E, 0x91, 0x91, 0x91, 0x6E}, //\\  8
+{0x70, 0x89, 0x89, 0x8A, 0x7C}, //\\  9
+{0x7F, 0x88, 0x88, 0x88, 0x7F}, //  A
+{0xFF, 0x91, 0x91, 0x91, 0x6E}, //  B
 {0x7E, 0x81, 0x81, 0x81, 0x42},//  C
 {0xFF, 0x81, 0x81, 0x42, 0x3C}, //\\  D
 {0xFF, 0x91, 0x91, 0x91, 0x81}, //\\  E
@@ -103,18 +113,8 @@ const uint8_t fonts [][5]=
 {0x11, 0x0A, 0x04, 0x0A, 0x11}, //\\  x
 {0x00, 0x39, 0x05, 0x05, 0x3E}, //\\  y
 {0x11, 0x13, 0x15, 0x19, 0x11}, //\\  z
-{0x00, 0x41, 0xFF, 0x01, 0x00}, //\\  1
-{0x43, 0x85, 0x89, 0x91, 0x61}, //\\  2
-{0x42, 0x81, 0x91, 0x91, 0x6E}, //\\  3
-{0x18, 0x28, 0x48, 0xFF, 0x08}, //\\  4
-{0xF2, 0x91, 0x91, 0x91, 0x8E}, //\\  5
-{0x1E, 0x29, 0x49, 0x89, 0x86}, //\\  6
-{0x80, 0x8F, 0x90, 0xA0, 0xC0}, //\\  7
-{0x6E, 0x91, 0x91, 0x91, 0x6E}, //\\  8
-{0x70, 0x89, 0x89, 0x8A, 0x7C}, //\\  9
 {0x60, 0x80, 0x8D, 0x90, 0x60}, //\\  ?
 {0x00, 0x00, 0xFD, 0x00, 0x00}, //\\  !
-{0x7E, 0x89, 0x91, 0xA1, 0x7E}, //\\  0
 {0x66, 0x89, 0x8F, 0x81, 0x7E}, //\\  @
 {0x24, 0xFF, 0x24, 0xFF, 0x24}, //\\  #
 {0x76, 0x89, 0x95, 0x62, 0x05}, //\\  &
@@ -189,7 +189,7 @@ int main(void) {
 //int U18 = 3;
 int State = 0;         
 int lastState = 0; 
- 
+ int rpm;
   while(1)
   {
  //EN=0;
@@ -198,20 +198,21 @@ int lastState = 0;
  //init_LCD();
  //delay1();
       int incre=0,count=0;
-  while(1)
-  {
-      if(IEC0bits.T1IE == 0)
-      {
-         
-      //printf("timer=%f\n\r",(double)(156250/timePeriod));
-          printf("timer=%i\n\r",(timePeriod));
-      // LATAbits.LATA2=!LATAbits.LATA2;
-      
-        TMR1 = 0x00; // Clear timer register
-        IEC0bits.T1IE = 1;
-        T1CONbits.TON = 1; // Start Timer
-      }
-  }   
+//  while(1)
+//  {
+//      if(IEC0bits.T1IE == 0)
+//      {
+//         
+//      //printf("timer=%f\n\r",(double)(156250/timePeriod));
+//          int rpm=(int)((156250/timePeriod)*60);
+//          printf("timer=%i\n\r",(rpm%10));
+//      // LATAbits.LATA2=!LATAbits.LATA2;
+//  
+//        TMR1 = 0x00; // Clear timer register
+//        IEC0bits.T1IE = 1;
+//        T1CONbits.TON = 1; // Start Timer
+//      }
+//  }   
       
       
  while(1)
@@ -238,9 +239,38 @@ LATB=0x00;
     
   }     */
 
+if(IEC0bits.T1IE == 0)
+      {
+         
+      //printf("timer=%f\n\r",(double)(156250/timePeriod));
+           rpm=(int)((156250/timePeriod)*60);
+         // printf("timer=%i\n\r",(rpm));
+      // LATAbits.LATA2=!LATAbits.LATA2;
+      
+//        TMR1 = 0x00; // Clear timer register
+//        IEC0bits.T1IE = 1;
+//        T1CONbits.TON = 1; // Start Timer
+           uint8_t d0=0;
+  d0 = rpm %10;
+ WriteLetter5Width_2dimensional(fonts,d0);
+ //printf("d0=%i\n\r",(d0));
+ rpm=rpm/10;
+  d0 = rpm %10;
+ WriteLetter5Width_2dimensional(fonts,d0);
+ //printf("d1=%i\n\r",(d0));
+ rpm=rpm/10;
+ d0 = rpm %10;
+ WriteLetter5Width_2dimensional(fonts,d0);
+ //printf("d2=%i\n\r",(d0));
+ rpm=rpm/10;
+d0 = rpm %10;
+ WriteLetter5Width_2dimensional(fonts,d0);
+ //printf("d3=%i\n\r",(d0));
+      }
 
-  
- 
+        TMR1 = 0x00; // Clear timer register
+        IEC0bits.T1IE = 1;
+        T1CONbits.TON = 1; // Start Timer
 ////     
 ////      WriteLetter6Width(N);
 ////      WriteLetter2Width(space);
@@ -255,15 +285,15 @@ LATB=0x00;
 //      WriteLetter2Width(space); 
 //            WriteLetter6Width(F);
 //      WriteLetter2Width(space);
-      delay_xm(incre*2);
-    WriteLetter5Width_2dimensional(fonts,incre); 
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
-
-     // WriteLetter9Width(custom);
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
+//      delay_xm(incre*2);
+//    WriteLetter5Width_2dimensional(fonts,incre); 
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
+//
+//     // WriteLetter9Width(custom);
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
      
 //delay1();
 //delay1();
