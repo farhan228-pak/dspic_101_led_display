@@ -172,7 +172,7 @@ const uint8_t fonts [][5]=
 // uint8_t H[]={0xFF,0x10,0x10,0x10,0xFF,0x00};// for reverse on padister fan clock wise print
 // //uint8_t A[]={0xFF,0x90,0x90,0x90,0x80,0x00,0x00};
 // uint8_t N[]={0xFF,0x03,0x08,0x20,0xFF,0x00};// for reverse on padister fan clock wise print
-// uint8_t space[]={0x00,0x00};
+ uint8_t space[]={0x00,0x00};
 // 
 // uint8_t custom[]={0b00000001,0b00000011,0b00000110,0b00001100,0b00000101,0b01111100,0b11000000,0b11000000,0b10111111,0b00000000,0b00110000,0b01001000,0b01111111,0b00000001,0b00011111,0b00000001,0b01111111,0b00000000,0b01111111}; // 8x9
 // 
@@ -254,14 +254,21 @@ if(IEC0bits.T1IE == 0)
   d0 = rpm %10;
  WriteLetter5Width_2dimensional(fonts,d0);
  //printf("d0=%i\n\r",(d0));
+       WriteLetter2Width(space);
+      WriteLetter2Width(space);
+ 
  rpm=rpm/10;
   d0 = rpm %10;
  WriteLetter5Width_2dimensional(fonts,d0);
  //printf("d1=%i\n\r",(d0));
+        WriteLetter2Width(space);
+      WriteLetter2Width(space);
  rpm=rpm/10;
  d0 = rpm %10;
  WriteLetter5Width_2dimensional(fonts,d0);
  //printf("d2=%i\n\r",(d0));
+        WriteLetter2Width(space);
+      WriteLetter2Width(space);
  rpm=rpm/10;
 d0 = rpm %10;
  WriteLetter5Width_2dimensional(fonts,d0);

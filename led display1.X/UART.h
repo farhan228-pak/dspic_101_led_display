@@ -13,12 +13,12 @@
 #define BAUDRATE 115200
 #define BRGVAL   ((40000000/BAUDRATE)/16)-1
 
-#define uart_tx_length 32
-#if uart_tx_length != 32 && uart_tx_length != 64 && uart_tx_length != 128
-	#error "UART buffer length must be 32, 64 or 128 bytes!"
-#endif
+#define uart_tx_length 3
+//#if uart_tx_length != 32 && uart_tx_length != 64 && uart_tx_length != 128
+//	#error "UART buffer length must be 32, 64 or 128 bytes!"
+//#endif
 
-#define UART_BUFFER_SIZE 10
+#define UART_BUFFER_SIZE 3
 
 
 void InitUART1(void);
