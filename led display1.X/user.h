@@ -18,7 +18,7 @@ void init_ADC(void);
 void TogglePower(void);
 void InitPins(void);
 void init_timer();
-extern volatile unsigned int pulse_count;
+extern volatile unsigned int pulse_count,timer_set;
 extern volatile int frequency;
 extern volatile unsigned int timePeriod;
 //#define LEDf1 LATBbits.LATB3

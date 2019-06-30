@@ -181,19 +181,20 @@ int main(void) {
     __delay32(10000);
     //Delay_5mS_Cnt();
    InitPins();
+ 
 //int timer =1100;    
 //int U18 = 3;
 int State = 0;         
 int lastState = 0; 
- 
+ int incre=0,count=0,pos=0;
   while(1)
   {
  //EN=0;
  //delay1();
- 
+      
  //init_LCD();
  //delay1();
-      int incre=0,count=0;
+      
       
  while(1)
  {
@@ -207,21 +208,112 @@ if (State != lastState){
 
 //WriteLetter3Width(A);
  /*int n;
-     m=0;
-  for ( n=0; n<=5; n++){
+                        m=0;
+                     for ( n=0; n<=5; n++){
   
-   LATB=F[n];
+                      LATB=F[n];
     
-    m=m+1;
-delay_xm(20);
-LATB=0x00;
+                       m=m+1;
+                   delay_xm(20);
+                   LATB=0x00;
 
     
-  }     */
+                     }     */
+      /*********************First Line display********************/
+                    LATB = 0b00000000;
+                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
+                    while (timer_set == 0);
+                    T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
+                    LATB = 0b11111111;
+                    delay1();
+                    LATB = 0b00000000;
+                    timer_set = 0;
+/********************************************************************************************/
 
-
-  
- 
+ /*********************Nest Line display********************/
+//                    TMR2 = 0x00; //Clear contents of the timer register
+//                    // T2CONbits.TCKPS = 0b11; //prescaler set to 256
+//                    //50us
+//                    PR2 = 20000; //Fosc/2000UL  	//Load the Period register with 1mSec counter    
+//                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
+//                    while (timer_set == 0);
+//                     T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
+//                    LATB = 0b11111111;
+//                    delay1();
+//                    LATB = 0b00000000;  
+//                     timer_set = 0;
+/********************************************************************************************/                     
+                   /*********************Nest Line display********************/
+//                    TMR2 = 0x00; //Clear contents of the timer register
+//                    // T2CONbits.TCKPS = 0b11; //prescaler set to 256
+//                    //50us
+//                    PR2 = 20000; //Fosc/2000UL  	//Load the Period register with 1mSec counter    
+//                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
+//                    while (timer_set == 0);
+//                     T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
+//                    LATB = 0b11111111;
+//                    delay1();
+//                    LATB = 0b00000000;  
+//                     timer_set = 0;
+/********************************************************************************************/  
+     int i=0;
+     
+     for(i=0;i<=58;i++)
+     {
+ /*********************Nest Line display********************/
+                    TMR2 = 0x00; //Clear contents of the timer register
+                    // T2CONbits.TCKPS = 0b11; //prescaler set to 256
+                    //50us
+                    PR2 = 12000; //Fosc/2000UL  	//Load the Period register with 1mSec counter    
+                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
+                    while (timer_set == 0);
+                     T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
+//                     if(count==290 && i==10)
+                     if(i==pos)
+                     {
+                        if(count==25 || incre==1)
+                        {
+                         
+                    LATB = 0b01100000;
+                    delay1();
+                    delay1();
+                     LATB = 0b00000000;
+                     incre=1;
+                        }
+                        
+                     else
+                        {
+                         
+                    LATB = 0b01111111;
+                    delay1();
+                    delay1();
+                     LATB = 0b00000000;
+                     incre=1;
+                        }
+                        
+                        
+                     }
+                     else{ 
+                    LATB = 0b11111111;
+                    delay1();
+                    delay1();
+//                    delay1();
+                    LATB = 0b00000000;
+                     }
+                     timer_set = 0;
+                     
+/********************************************************************************************/  
+     }
+                     
+ count++;                    
+  if(count>=50)
+  {
+      count=0;
+              incre=0;
+              pos=pos+1;
+  }
+                     
+                     
 ////     
 ////      WriteLetter6Width(N);
 ////      WriteLetter2Width(space);
@@ -236,31 +328,19 @@ LATB=0x00;
 //      WriteLetter2Width(space); 
 //            WriteLetter6Width(F);
 //      WriteLetter2Width(space);
-      delay_xm(incre*2);
-    WriteLetter5Width_2dimensional(fonts,incre); 
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
-
-     // WriteLetter9Width(custom);
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
-      WriteLetter2Width(space);
+//      delay_xm(incre*2);
+//    WriteLetter5Width_2dimensional(fonts,incre); 
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
+//
+//     // WriteLetter9Width(custom);
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
+//      WriteLetter2Width(space);
      
 //delay1();
 //delay1();
-delay1();
-count++;
-if(count==20)
-{
-    incre++;
-    
-    if(incre==78)
-    {
-        incre=0;
-
-    }
-    count=0;
-}   
+  
             
 
   }
@@ -279,7 +359,7 @@ for(k=0;k<=3000;k++)
 
 
  
-delay1();
+//delay1();
 
 /**********************************************/
  

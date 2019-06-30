@@ -22,7 +22,7 @@
 /* User Functions                                                             */
 
 /******************************************************************************/
-volatile unsigned int pulse_count = 0;
+volatile unsigned int pulse_count = 0,timer_set=0;
 volatile unsigned int timePeriod=0;
 volatile int frequency = 2;
 int Pulse = 40;
@@ -51,6 +51,7 @@ void InitPins() {
     _TRISA3 = 1;
     _TRISB14=1;
     _TRISB15 = 1;
+      InitTimers();
 }
 
 void InitTimers() {
@@ -72,14 +73,15 @@ void InitTimers() {
 
     /**************************************************************/
     //timer running at clock/256 
-    T2CON = 0x00; //Stops the Timer1 and reset control reg.
+    T2CON	 = 0x8000; //Stops the Timer1 and reset control reg.
     TMR2 = 0x00; //Clear contents of the timer register
-    T2CONbits.TCKPS = 0b11; //prescaler set to 256
-    PR2 = 65530; //Fosc/2000UL  	//Load the Period register with 1mSec counter
+   // T2CONbits.TCKPS = 0b11; //prescaler set to 256
+    //50us
+    PR2 = 1000; //Fosc/2000UL  	//Load the Period register with 1mSec counter
     //IPC1bits.T2IP = 0x02; //Setup Timer1 interrupt for desired priority level
     // (This example assigns level 1 priority)
-    //IFS0bits.T2IF = 0; //Clear the Timer1 interrupt status flag
-    //IEC0bits.T2IE = 0; //Enable Timer1 interrupts
+    IFS0bits.T2IF = 0; //Clear the Timer1 interrupt status flag
+    IEC0bits.T2IE = 1; //Enable Timer1 interrupts
     T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and
     //clock source set to the internal instruction cycle
     
@@ -96,7 +98,7 @@ PR1 = 65535; // Load the period value
 IPC0bits.T1IP = 0x01; // Set Timer1 Interrupt Priority Level
 IFS0bits.T1IF = 0; // Clear Timer1 Interrupt Flag
 IEC0bits.T1IE = 1; // Enable Timer1 interrupt
-T1CONbits.TON = 1; // Start Timer
+T1CONbits.TON = 0; // Start Timer
 /* Example code for Timer1 ISR */
 }
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
@@ -141,3 +143,8 @@ LATAbits.LATA2=0;
 
 }
 
+void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
+{
+    timer_set=1;
+    IFS0bits.T2IF = 0; // Clear Timer1 Interrupt Flag
+}
