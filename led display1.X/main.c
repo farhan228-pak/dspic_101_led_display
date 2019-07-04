@@ -220,14 +220,14 @@ if (State != lastState){
     
                      }     */
       /*********************First Line display********************/
-                    LATB = 0b00000000;
-                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
-                    while (timer_set == 0);
-                    T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
-                    LATB = 0b11111111;
-                    delay1();
-                    LATB = 0b00000000;
-                    timer_set = 0;
+//                    LATB = 0b00000000;
+//                    T2CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:1 and
+//                    while (timer_set == 0);
+//                    T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
+//                    LATB = 0b11111111;
+//                    delay1();
+//                    LATB = 0b00000000;
+//                    timer_set = 0;
 /********************************************************************************************/
 
  /*********************Nest Line display********************/
@@ -269,37 +269,57 @@ if (State != lastState){
                     while (timer_set == 0);
                      T2CONbits.TON = 0; //Start Timer1 with prescaler settings at 1:1 and  
 //                     if(count==290 && i==10)
-                     if(i==pos)
+//                     if(i==pos)
+//                     {
+//                        if(count==25 || incre==1)
+//                        {
+//                         
+//                    LATB = 0b01100000;
+//                    delay1();
+//                    delay1();
+//                     LATB = 0b00000000;
+//                     incre=1;
+//                        }
+//                        
+//                     else
+//                        {
+//                         
+//                    LATB = 0b01111111;
+//                    delay1();
+//                    delay1();
+//                     LATB = 0b00000000;
+//                     incre=1;
+//                        }
+//                        
+//                        
+//                     }
+//                     else{ 
+            if(i==0 || i==15 || i==32 || i== 50)         
+            {
+                     
+                if(i==0)    
+                {
+                     WriteLetter5Width_2dimensional(fonts,52);
+                     WriteLetter5Width_2dimensional(fonts,53);
+                     incre++;
+                }
+                else{
+                WriteLetter5Width_2dimensional(fonts,incre+52); 
+                     incre++;
+                     if(incre==4)
                      {
-                        if(count==25 || incre==1)
-                        {
-                         
-                    LATB = 0b01100000;
-                    delay1();
-                    delay1();
-                     LATB = 0b00000000;
-                     incre=1;
-                        }
-                        
-                     else
-                        {
-                         
-                    LATB = 0b01111111;
-                    delay1();
-                    delay1();
-                     LATB = 0b00000000;
-                     incre=1;
-                        }
-                        
-                        
+                         incre=0;
                      }
-                     else{ 
+                }
+            }      
+                     
+                     
                     LATB = 0b11111111;
                     delay1();
                     delay1();
 //                    delay1();
                     LATB = 0b00000000;
-                     }
+                    // }
                      timer_set = 0;
                      
 /********************************************************************************************/  
@@ -559,6 +579,6 @@ void WriteLetter5Width_2dimensional(const uint8_t letter[][5],uint8_t index){
    LATB= letter[index][m];
     
     m=m+1;
-  delay_xm(6);
+  delay_xm(1);
 }
 } 
