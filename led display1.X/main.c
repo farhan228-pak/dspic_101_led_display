@@ -44,7 +44,7 @@ void DD_RAM_Address(uint8_t addr);
 //    // HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,0xFFFF);
 //    /* If everything is OK, you have to return character written */
 //    return ch;
-//    /* If character is not correct, you can return EOF (-1) to stop writing */
+//    /* If character is not correct, you can return EOF (-1) to stop writing  test hgjg*/
 //    //return -1;
 //}
 
